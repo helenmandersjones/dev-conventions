@@ -25,11 +25,16 @@ added under `docs/tasks/`.
 - **`cursor/skills/`** — agent skills read by Cursor from each project's
   `.cursor/skills/` directory.
 - **`docs/conventions/`** — long-form prose conventions referenced from rules
-  and from in-repo code/docs (e.g. `docs/conventions/testing.md`).
+  and from in-repo code/docs (e.g. `docs/conventions/testing.md`,
+  `multitenancy.md`).
 - **`AGENTS.md`** — generic orientation surfaced to Cursor / Codex / Claude
   / etc. via a symlink at each project root.
 - **`scaffold/docs/tasks/`** — starter task tracker files copied into each
   project by `bootstrap.sh` (committed per project, not symlinked).
+
+Human-facing product docs (`user-guide`, `technical-design`, `operations`)
+live **in each app**, not in this repo, and are not part of the conventions
+symlink.
 
 ## How projects use this
 

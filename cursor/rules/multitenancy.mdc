@@ -1,0 +1,17 @@
+---
+description: Multitenant GORM — session tenant; don’t pass User/tenantId for isolation
+globs: grails-app/services/**/*.groovy,grails-app/controllers/**/*.groovy,grails-app/commands/**/*.groovy,src/test/**/*.groovy,src/integration-test/**/*.groovy
+alwaysApply: false
+---
+
+# Multitenancy (GORM)
+
+When working with **`MultiTenant`** domain classes in the Grails web app:
+
+1. Rely on the **session tenant** set by the login interceptor (`SessionTenantResolver`). Do **not** pass `User` or `tenantId` into services just to scope Multitenant queries.
+2. Prefer APIs such as `accept(jobId)` / `get(id)`. Wrong-tenant or missing ids look like **not found**.
+3. Pass `User` only for **non-tenancy** reasons (e.g. `createdBy` audit).
+4. **CLI / commands:** wrap Multitenant work in `Tenants.withId(...)`.
+5. **Workers / disk APIs:** may still take explicit `tenantId` (no session / filesystem paths).
+
+Long-form: **`docs/conventions/multitenancy.md`**.

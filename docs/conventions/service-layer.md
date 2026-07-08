@@ -29,6 +29,12 @@ Conventions for **Grails services** in this codebase. Layers above the service (
 - **Do not log in service methods** unless the log line adds **real diagnostic context** not already in the stack trace.
 - **Keep happy-path code linear** — validate early, then proceed without nested failure branches.
 
+## Multitenancy
+
+For Multitenant GORM entities in a web request, do not pass `User` or
+`tenantId` solely to enforce isolation — rely on the session tenant. See
+[`multitenancy.md`](multitenancy.md).
+
 ## Rationale
 
 Clear failure modes, testable contracts, and a single place (typically
