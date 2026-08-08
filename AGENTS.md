@@ -4,7 +4,8 @@ This project follows shared conventions provided via the sibling
 `dev-conventions/` repo, symlinked into:
 
 - `.cursor/rules/` — operational rules (auto-loaded by Cursor).
-- `.cursor/skills/` — agent skills.
+- `.cursor/skills/` and `.agents/skills/` — shared agent skills (same
+  `SKILL.md` folders; Cursor vs Codex discovery paths).
 - `docs/conventions/` — long-form prose referenced from the rules.
 - `AGENTS.md` (this file) — shared orientation for any agent.
 

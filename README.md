@@ -9,11 +9,11 @@ Shared development conventions and AI agent rules
 ./dev-conventions/bootstrap.sh ./my-new-app
 ```
 
-The script creates the four symlinks, scaffolds `docs/tasks/` when missing
-(files are copied into the project and should be committed there), and
-prints the `.gitignore` lines to add. It's idempotent: re-running leaves
-existing symlinks and task files alone; only missing scaffold files are
-added under `docs/tasks/`.
+The script creates the shared symlinks (including skills for both Cursor and
+Codex), scaffolds `docs/tasks/` when missing (files are copied into the project
+and should be committed there), and prints the `.gitignore` lines to add. It's
+idempotent: re-running leaves existing symlinks and task files alone; only
+missing scaffold files are added under `docs/tasks/`.
 
 
 ## Further Info:
@@ -22,8 +22,8 @@ added under `docs/tasks/`.
 
 - **`cursor/rules/`** — `.mdc` rule files read by [Cursor](https://cursor.sh)
   from each project's `.cursor/rules/` directory.
-- **`cursor/skills/`** — agent skills read by Cursor from each project's
-  `.cursor/skills/` directory.
+- **`skills/`** — Agent Skills (`SKILL.md` folders). Shared across agents via
+  project symlinks: `.cursor/skills` (Cursor) and `.agents/skills` (Codex).
 - **`docs/conventions/`** — long-form prose conventions referenced from rules
   and from in-repo code/docs (e.g. `docs/conventions/testing.md`,
   `multitenancy.md`).
@@ -53,7 +53,8 @@ Each project gets the shared content via **relative symlinks** at:
 
 - `<project>/AGENTS.md            -> ../dev-conventions/AGENTS.md`
 - `<project>/.cursor/rules        -> ../../dev-conventions/cursor/rules`
-- `<project>/.cursor/skills       -> ../../dev-conventions/cursor/skills`
+- `<project>/.cursor/skills       -> ../../dev-conventions/skills`
+- `<project>/.agents/skills       -> ../../dev-conventions/skills`
 - `<project>/docs/conventions     -> ../../dev-conventions/docs/conventions`
 
 The symlinks are `.gitignore`d in each project. Cloning a project alone is

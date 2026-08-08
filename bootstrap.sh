@@ -23,10 +23,12 @@ if [[ "$(dirname "$project_dir")" != "$(dirname "$conventions_dir")" ]]; then
 fi
 
 # Each entry: <link_path_within_project>:<target_path_within_dev_conventions>
+# Skills live once under skills/; Cursor and Codex each get a discovery symlink.
 links=(
   "AGENTS.md:AGENTS.md"
   ".cursor/rules:cursor/rules"
-  ".cursor/skills:cursor/skills"
+  ".cursor/skills:skills"
+  ".agents/skills:skills"
   "docs/conventions:docs/conventions"
 )
 
@@ -92,6 +94,7 @@ echo "Done. Add these to $project_dir/.gitignore if not already present:"
 echo "  /AGENTS.md"
 echo "  /.cursor/rules"
 echo "  /.cursor/skills"
+echo "  /.agents/skills"
 echo "  /docs/conventions"
 echo
 echo "Commit docs/tasks/ in the project repo (it is not symlinked)."

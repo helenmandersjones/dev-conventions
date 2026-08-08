@@ -3,7 +3,7 @@ description: Grails command objects adapt HTTP params to DTOs before services
 alwaysApply: true
 ---
 
-# Command objects & request adapters
+# Command objects & DTO adapters
 
 - **Bind** what Grails can bind: scalar wizard fields on a **command object** with `constraints`.
 - **Adapt** what it cannot (indexed keys, odd shapes, legacy names): add **helper methods on the same command**, e.g. `List<Foo> foosFromRequest(Map params)` or `SomeDto payloadFromRequest(Map params)`, that return **typed DTOs** (immutable POGOs in `src/main/groovy/...` when shared).
@@ -12,4 +12,8 @@ alwaysApply: true
 - **Domain objects**: do **not** construct domain objects directly from `params` in controllers. Services own persistence/domain construction.
 - **Services**: take **domain-shaped arguments** (scalars, DTOs, `List<YourRow>`), not `GrailsParameterMap` / unconstrained `Map` from the request.
 
-Reference: occurrence import map step — `FileMapCommand#columnMappingsFromRequest`, `ColumnMapping`, `OccurrenceImportService#saveMapping`.
+Reference implementations:
+
+- `CreateDemoItemCommand#toCreateDto()` → `CreateDemoItemDto` → `FormHandlingDemoService#createDemoItem` (`nbn-components-plugin`)
+- `SavePersonCommand#toSaveDto()` → `SavePersonDto` → `PersonService#create` / `#update` (`nbn-recorder-grails`)
+- Occurrence import map step — `FileMapCommand#columnMappingsFromRequest`, `ColumnMapping`, `OccurrenceImportService#saveMapping`

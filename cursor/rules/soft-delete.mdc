@@ -1,0 +1,15 @@
+---
+description: Soft-delete conventions for Grails/GORM domains
+globs: grails-app/domain/**/*.groovy,grails-app/services/**/*.groovy,src/test/**/*.groovy,src/integration-test/**/*.groovy
+alwaysApply: false
+---
+
+# Soft delete
+
+When a project/domain has chosen soft delete, follow `docs/conventions/soft-delete.md`.
+
+Use a nullable timestamp column such as `Date deleted`. Normal application reads should silently exclude deleted rows through service query methods such as `Domain.where { deleted == null }`; callers should not need to remember the filter.
+
+Service delete methods should be explicit and boring: perform required relationship cleanup inline when it is part of the delete contract, then mark `deleted` with GORM/HQL `Domain.executeUpdate(...)`, scoped to tenant/owner where applicable, and constrained with `deleted is null`.
+
+Avoid cascades, archive/deleted mirror tables, PostgreSQL triggers, native SQL helpers, and generic soft-delete frameworks unless the user/project explicitly asks for that approach. If code needs deleted rows, make that an explicit query path rather than weakening normal list/get methods.
