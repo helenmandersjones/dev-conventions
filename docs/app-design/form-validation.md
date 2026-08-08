@@ -6,7 +6,7 @@ Write validation logic once. Business logic validation lives on the server. Only
 
 See also: [HTMX Patterns](htmx-patterns.md), [Form Validation UI](../conventions/form-validation-ui.md)
 
-**Live demo:** run `./gradlew bootRun` in `nbn-components-plugin`, then open [Form handling demo](http://localhost:8765/demos/formHandlingDemo/index) — command-object create form with Bootstrap client validation, HTMX blur uniqueness check, and service-owned entity construction. Source: `nbn-components-plugin` → `FormHandlingDemoController`, `CreateDemoItemCommand`, `FormHandlingDemoService`.
+**Live demo:** run `./gradlew bootRun` in `components-plugin`, then open [Form handling demo](http://localhost:8765/demos/formHandlingDemo/index) — command-object create form with Bootstrap client validation, HTMX blur uniqueness check, and service-owned entity construction. Source: `components-plugin` → `FormHandlingDemoController`, `CreateDemoItemCommand`, `FormHandlingDemoService`.
 
 ## Two-tier approach
 

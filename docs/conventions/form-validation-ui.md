@@ -3,7 +3,7 @@
 This project standardizes form validation behavior using the same pattern as the
 form handling demo.
 
-**Reference demo:** [Form handling demo](http://localhost:8765/demos/formHandlingDemo/index) in `nbn-components-plugin` (`./gradlew bootRun` on port 8765). Agents should copy this pattern for new forms unless a local feature has a documented reason to differ.
+**Reference demo:** [Form handling demo](http://localhost:8765/demos/formHandlingDemo/index) in `components-plugin` (`./gradlew bootRun` on port 8765). Agents should copy this pattern for new forms unless a local feature has a documented reason to differ.
 
 ## Goal
 

@@ -17,6 +17,11 @@ This project follows shared conventions provided via the sibling
 - **Conventions**: `docs/conventions/` for long-form details (e.g.
   `testing.md`, `service-layer.md`, `multitenancy.md`,
   `evolution-and-compatibility.md`).
+- **Reference app**: `../grails-reference-app/` is the canonical minimal
+  Grails implementation reference when that sibling repo exists. Use it for
+  concrete examples of thin controllers, command objects, service transactions,
+  DTO/input objects, central exception handling, full-page and HTMX validation,
+  `components-plugin` GSP markup, URL mappings, and focused Spock tests.
 - **Tasks** (per-project, not shared): `docs/tasks/` — `open/`, `done/`,
   `completed.md`, and `CURRENT_HANDOFF.md` when multi-slice work is active.
   Run `../dev-conventions/bootstrap.sh` on a new project to scaffold this
@@ -33,6 +38,9 @@ This project follows shared conventions provided via the sibling
 - Shared rules / skills / conventions / this file → edit in
   `../dev-conventions/` and commit there. The change is picked up
   automatically through the symlinks.
+- Reference implementation patterns → read from `../grails-reference-app/`
+  when present; do not copy its sample `Project` domain wholesale unless the
+  target app genuinely needs that domain.
 
 ## Growing this file
 

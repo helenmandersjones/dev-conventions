@@ -15,6 +15,10 @@ and should be committed there), and prints the `.gitignore` lines to add. It's
 idempotent: re-running leaves existing symlinks and task files alone; only
 missing scaffold files are added under `docs/tasks/`.
 
+For Grails apps, keep `grails-reference-app/` cloned next to the app and this
+repo when possible. Agents use it as the canonical minimal implementation
+reference for new feature slices.
+
 
 ## Further Info:
 
@@ -44,6 +48,7 @@ This repo is **not** a dependency in any build sense. Each app expects to find
 ```
 GRAILS/
   dev-conventions/         <-- this repo
+  grails-reference-app/     <-- canonical implementation reference
   my-new-app/
   planeout/
   ...
@@ -60,6 +65,12 @@ Each project gets the shared content via **relative symlinks** at:
 The symlinks are `.gitignore`d in each project. Cloning a project alone is
 not enough — you also need to clone `dev-conventions` next to it and run
 `bootstrap.sh`.
+
+When `../grails-reference-app/` exists beside an app, agents should start at
+`../grails-reference-app/docs/reference/README.md` for concrete examples of
+thin controllers, command objects, typed service inputs, central exception
+handling, full-page and HTMX validation, `components-plugin` markup, URL
+mappings, and focused Spock tests.
 
 
 ## Updating conventions

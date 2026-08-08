@@ -150,7 +150,7 @@ Example include list for a page link:
 
 ## Reference implementation
 
-**Plugin:** `nbn-components-plugin/grails-app/views/simpleDataTable/_table.gsp`
+**Plugin:** `components-plugin/grails-app/views/simpleDataTable/_table.gsp`
 
 **Host example:** occurrence browse — `OccurrenceController#tablePartial` binds
 `SimpleDataTableCommand`; the host adapts to `OccurrenceSearchCommand`.

@@ -1,0 +1,13 @@
+---
+description: Local login credentials for nbn-recorder when exercising the running app
+alwaysApply: true
+---
+
+# Local app login (nbn-recorder)
+
+When browsing or verifying the running Grails app and you hit the login page, use:
+
+- **Email:** `h.manders.jones+1@nbn.org.uk`
+- **Password:** `password`
+
+Do not ask the user for credentials when these work. This is a local/dev account only.

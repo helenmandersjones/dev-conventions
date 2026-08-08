@@ -13,7 +13,7 @@ When implementing HTMX flows in this repo, use these defaults:
 4. **Validation path:** on invalid HTMX POST, rerender the same form fragment with command errors; do not redirect.
 5. **JSON safety:** build `HX-Trigger` payloads with `JsonOutput.toJson(...)`; never hand-build JSON header strings.
 6. **Toasts and errors:** success toasts come from domain events; `htmx:responseError` should be handled centrally in layout, parsing JSON only when response `Content-Type` is JSON and otherwise falling back to status text.
-7. **Fragment state (paging/sort):** hidden inputs at scope levels (`#<id>-state`, `[data-role="carry-through-state-params"]`, action `[data-role]` wrappers) + `hx-include`; see `docs/conventions/htmx-fragment-state.md` (example: `nbn-components-plugin/grails-app/views/simpleDataTable/_table.gsp`).
+7. **Fragment state (paging/sort):** hidden inputs at scope levels (`#<id>-state`, `[data-role="carry-through-state-params"]`, action `[data-role]` wrappers) + `hx-include`; see `docs/conventions/htmx-fragment-state.md` (example: `components-plugin/grails-app/views/simpleDataTable/_table.gsp`).
 
 Rule of thumb:
 - HTMX success: `HX-Trigger` + empty body

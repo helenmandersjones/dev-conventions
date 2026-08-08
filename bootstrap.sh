@@ -98,3 +98,8 @@ echo "  /.agents/skills"
 echo "  /docs/conventions"
 echo
 echo "Commit docs/tasks/ in the project repo (it is not symlinked)."
+if [[ -d "$(dirname "$project_dir")/grails-reference-app" ]]; then
+  echo "Reference app found at ../grails-reference-app; agents will use it for concrete Grails slice examples."
+else
+  echo "Optional: clone grails-reference-app next to this project so agents can use ../grails-reference-app as the canonical implementation reference."
+fi
