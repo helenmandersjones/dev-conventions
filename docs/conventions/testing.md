@@ -20,8 +20,8 @@ If assertions run in a **new** transaction while the work under test stayed in a
 ## Related docs
 
 - Service behaviour and exceptions: [`service-layer.md`](service-layer.md)
+- Multitenancy (`Tenants.withId`, session tenant): [`multitenancy.md`](multitenancy.md)
 - Replace features vs parallel legacy (pre-release defaults): [`evolution-and-compatibility.md`](evolution-and-compatibility.md)
-- Occurrence import flow (queue, worker, runner): [`../dev-doc/occurrence-import-jobs.md`](../dev-doc/occurrence-import-jobs.md)
 
 ## TDD + design workflow (required)
 

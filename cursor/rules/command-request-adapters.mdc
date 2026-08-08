@@ -7,10 +7,10 @@ alwaysApply: true
 
 - **Bind** what Grails can bind: scalar wizard fields on a **command object** with `constraints`.
 - **Adapt** what it cannot (indexed keys, odd shapes, legacy names): add **helper methods on the same command**, e.g. `List<Foo> foosFromRequest(Map params)` or `SomeDto payloadFromRequest(Map params)`, that return **typed DTOs** (immutable POGOs in `src/main/groovy/...` when shared).
-- **Naming**: suffix service-layer payloads with **`Dto`** (e.g. `SavePersonDto`, `CreateDemoItemDto`). Do **not** use `Request` or `Input` — those suggest HTTP binding or GraphQL input types. Command adapter methods are named `toXxxDto()` (e.g. `toSaveDto()`, `toCreateDto()`).
-- **Immutability**: annotate DTOs with `@Immutable` (defensive copies of collections; generated constructor supports named-arg / map construction from commands).
-- **Controllers**: after validation, `cmd.toXxxDto()` (or `cmd.adapterMethod(params)` when params need adapting) then pass DTOs into the service—**do not** pass raw `params` to services for command-shaped work.
-- **Services**: take **domain-shaped arguments** (DTOs, `List<YourRow>`), not `GrailsParameterMap` / unconstrained `Map` from the request.
+- **Controllers**: use command objects as the HTTP request/form boundary for user input actions (create, update, workflow, search/filter, and other validated operations). The GET action creates the command for the model; the POST action accepts the command as an action parameter.
+- **Controllers after validation**: pass scalar values, `cmd.adapterMethod(params)` DTOs, or other domain-shaped inputs into the service—**do not** pass raw `params` to services for command-shaped work.
+- **Domain objects**: do **not** construct domain objects directly from `params` in controllers. Services own persistence/domain construction.
+- **Services**: take **domain-shaped arguments** (scalars, DTOs, `List<YourRow>`), not `GrailsParameterMap` / unconstrained `Map` from the request.
 
 Reference implementations:
 

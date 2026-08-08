@@ -5,7 +5,9 @@ alwaysApply: true
 
 # Grails services
 
-When editing **`grails-app/services/`**, follow **`docs/conventions/service-layer.md`**: command methods throw (`IllegalArgumentException`, `IllegalStateException`, `ValidationException`); finders may return `null` for “not found”; **catch only for rollback/cleanup**, then rethrow; otherwise let exceptions propagate; minimal logging; linear happy path.
+When editing **`grails-app/services/`**, follow **`docs/conventions/service-layer.md`**: command methods throw (`IllegalArgumentException`, `IllegalStateException`, `ValidationException`); finders may return `null` for “not found”; **catch only for rollback/cleanup**, then rethrow; otherwise let exceptions propagate; minimal logging; linear happy path. User-correctable form problems belong in command-object validation before service calls; service exceptions are exceptional and should usually bubble to central error handling, not be caught in every controller action to recreate form errors.
+
+For **`MultiTenant`** GORM work in the web app, do **not** pass `User` / `tenantId` only for isolation — see **`docs/conventions/multitenancy.md`** and rule **`multitenancy.mdc`**.
 
 ## Transactions (GORM service methods)
 

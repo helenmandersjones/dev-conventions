@@ -14,3 +14,5 @@ Before **non-trivial** work (new behaviour, multi-file changes, security/data mo
 5. Skip (3)–(4) for trivial edits or if the user says to skip task files.
 
 If rules were not in context, still follow (1)–(4) when the user mentions tasks or **`docs/tasks`** (handoffs and post-GREEN slice notes when doing TDD slices).
+
+**Task complete (whole task, not a single slice):** see **`task-boundaries-and-handoffs`** — commit (no push), update docs, repoint **`CURRENT_HANDOFF.md`**, then the human starts a **new chat** with **`Resume task handoff`**.

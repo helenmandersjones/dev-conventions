@@ -9,7 +9,11 @@ Use this rule set every time for `docs/tasks` workflow:
 5. When task outcome is complete:
    - Move task and handoff files to `docs/tasks/done/`
    - Update `docs/tasks/completed.md`
-   - Repoint or clear `docs/tasks/CURRENT_HANDOFF.md`
+   - Repoint `docs/tasks/CURRENT_HANDOFF.md` to the **next** open task (links + suggested next slice); clear handoff link until the new task has a slice handoff
+   - **Commit locally** (do **not** push): use the commit label from the handoff or `CURRENT_HANDOFF.md`; subject format e.g. `occurrence-import: slice 1 — short description`
+   - End with a one-line reminder for the human: open a **new chat** and type **`Resume task handoff`** (or @`docs/tasks/CURRENT_HANDOFF.md`)
+
+The human does **not** need to paste task paths or re-explain context — `CURRENT_HANDOFF.md` is the entry point for the next session.
 
 Terminology:
 - Iteration/phase are planning containers.
