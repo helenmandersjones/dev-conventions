@@ -76,7 +76,9 @@ int softDelete(Collection<Long> ids) {
 }
 ```
 
-Bulk updates bypass `beforeSoftDelete()`, so required relationship cleanup must be done in the service, also with tenant-bound HQL.
+Bulk updates bypass `beforeSoftDelete()`, so required relationship cleanup must be done in the service, also with tenant-bound HQL. Cleanup updates bump `version` too.
+
+An update query does not flush the session first. If the same request has already changed one of the rows in memory, save that object before the update; otherwise the update bumps its version and the later save fails as stale.
 
 ## Domain `delete()`
 
