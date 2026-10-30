@@ -10,6 +10,8 @@ When a project/domain has chosen soft delete, follow `docs/conventions/soft-dele
 
 Use a nullable timestamp column such as `Date deleted`. Normal application reads should silently exclude deleted rows through service query methods such as `Domain.where { deleted == null }`; callers should not need to remember the filter.
 
-Service delete methods should be explicit and boring: perform required relationship cleanup inline when it is part of the delete contract, then mark `deleted` with GORM/HQL `Domain.executeUpdate(...)`, scoped to tenant/owner where applicable, and constrained with `deleted is null`.
+Delete one record by loading it through the service's active, tenant-scoped `get` and calling the trait's `domain.softDelete(flush: true, failOnError: true)`, so Hibernate's version check catches stale edits. When whether it may be deleted depends on rows another request could add (children, records), load it with `[lock: true]` before checking, and take the same lock where those rows are attached. Delete many records with one HQL update that binds `tenantId`, includes `deleted is null`, and sets `version = version + 1`.
+
+Never call `delete()` on a soft-deletable domain; the trait's `beforeDelete()` throws. Inside the trait, change `deleted` with `setDeleted(...)`: plain assignment skips GORM's change tracking and the save writes nothing.
 
 Avoid cascades, archive/deleted mirror tables, PostgreSQL triggers, native SQL helpers, and generic soft-delete frameworks unless the user/project explicitly asks for that approach. If code needs deleted rows, make that an explicit query path rather than weakening normal list/get methods.
