@@ -52,6 +52,7 @@ of that type instead of suppressing it repeatedly. Do this only with agreement.
 | `command-request-adapters` | `GrailsMassAssignment`; `ServiceHttpDependency` rejects explicit HTTP request/response types in services | validation, DTO shape, and whether a Map is request-shaped |
 | domain declarations | `GrailsDuplicateConstraint`, `GrailsDuplicateMapping`, `GrailsDomainWithServiceReference` | domain modelling |
 | `multitenancy` | `TenantBoundary` flags known bypass calls and annotations in web controllers/services; `WebLayerJdbc` flags direct JDBC dependencies there | query correctness, authentication, relationships, filesystem isolation, indirect/dynamic access |
+| `edit-form-versions` | `EditFormCommand` (custom, where adopted) fails a `Save*Command` in controllers that doesn't extend `EditFormCommand`, or another command declaring its own `version` | whether the service's `update` calls `assertUnchanged` |
 | `simple-linear-code` | `CognitiveComplexity` (PMD), `NestedBlockDepth` (CodeNarc) as a backstop | when to extract a method |
 
 `NPathComplexity` is deliberately not used: it penalises flat lists of guard
