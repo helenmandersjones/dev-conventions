@@ -1,0 +1,19 @@
+---
+description: Edit forms carry the record's version and refuse a save when someone else changed it (optimistic locking)
+globs: grails-app/controllers/**/*.groovy,grails-app/services/**/*.groovy,grails-app/views/**/*.gsp,grails-app/taglib/**/*.groovy,src/main/groovy/**/*.groovy
+alwaysApply: false
+---
+
+# Edit form versions
+
+When a form **edits an existing record**, follow **`docs/conventions/edit-form-versions.md`**: the form carries the version the record had when it was opened, and the save is refused if someone else has saved the record since. GORM's own version check only covers the instant of saving, so on its own it never notices a form opened minutes earlier.
+
+1. **Command:** extend the project's `EditFormCommand` base class, which carries `id`, `version` and `isEditing()` and validates `version`. Don't declare them yourself. Name the edited domain class with `editedDomainClass()`. Name edit commands `Save*Command`.
+2. **Form:** render the record identity with the project's tag (`<nbn:editedRecord command="${cmd}"/>`), which writes the hidden `id` and `version` and shows the "someone else changed this" message. Don't write your own hidden `id`.
+3. **Service:** `update(Long id, Long version, Dto dto)` calls `EditFormVersion.assertUnchanged(record, version)` before changing anything. It throws Spring's `OptimisticLockingFailureException`, the same exception Hibernate throws when two saves collide at flush.
+4. **Controller:** pass `cmd.version`; don't catch the exception. The central error handler answers it with 409 and the same message.
+5. **Test:** an integration spec saving with a stale version, checking the first change survives.
+
+Not needed for create-only forms, single-purpose actions (delete, remove item) or bulk HQL updates (which set `version = version + 1`).
+
+Reference implementation: `nbn-recorder-grails` (`EditFormCommand`, `EditFormVersion`, `EditFormTagLib`, `StaleEditIntegrationSpec`, and the `EditFormCommand` CodeNarc rule).
