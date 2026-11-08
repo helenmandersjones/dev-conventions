@@ -18,7 +18,7 @@ When you are **actively working through a task** that uses slice handoffs (`open
 2. In a **new chat**, either:
    - **@** mention [`CURRENT_HANDOFF.md`](CURRENT_HANDOFF.md), or  
    - Type a short instruction, for example: **`Resume task handoff`** or **`Read docs/tasks/CURRENT_HANDOFF.md and continue`**, or  
-   - Use the project skill **`resume-task-handoff`** (see [`.cursor/skills/resume-task-handoff/SKILL.md`](../../.cursor/skills/resume-task-handoff/SKILL.md)).
+   - Use the project skill **`nbn-resume-task-handoff`** (see [`.cursor/skills/nbn-resume-task-handoff/SKILL.md`](../../.cursor/skills/nbn-resume-task-handoff/SKILL.md)).
 
 The assistant should read **`CURRENT_HANDOFF.md` first**, then the linked **handoff** file (latest slice / next slice), then the **task** file.
 

@@ -1,0 +1,23 @@
+---
+description: Run the project's linters before finishing a change; fix violations rather than suppress them
+alwaysApply: true
+---
+
+# Lint verification
+
+When a Gradle project has Spotless, PMD, SpotBugs or CodeNarc configured in
+`build.gradle`:
+
+1. Before reporting a change as done, run `./gradlew spotlessApply`, then
+   `./gradlew check`. In a Grails app, `./gradlew check -x integrationTest` is
+   acceptable when no database is available; say that you skipped them.
+2. Fix violations in the code. Lint does not run in CI, so this run is the only
+   gate.
+3. Suppress only a deliberate exception, at the narrowest scope (line, then
+   method, never class), with a one-line reason next to it.
+4. Do not change rulesets, thresholds or `ignoreFailures` to get a clean run
+   unless the user agrees.
+5. In the summary, say that lint passed and list any suppressions you added.
+
+Suppression syntax, tools per repo and the rules each tool enforces:
+**`docs/conventions/linting.md`**.

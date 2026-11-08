@@ -1,0 +1,21 @@
+---
+description: Prefer simple linear code and avoid unnecessary indirection
+alwaysApply: true
+---
+
+# Simple, linear code
+
+Apply this principle across projects and languages, including Java and Groovy.
+
+- Prefer straightforward, linear code with important logic visible at the
+  point of use.
+- Keep short, readable logic inline.
+- Extract a method when it removes meaningful duplication, gives a useful name
+  to genuinely complex logic, or creates a real independently testable
+  boundary.
+- Do not create small methods merely to move a few straightforward lines away
+  from their caller.
+- Avoid additional layers, interfaces, wrappers, and generic abstractions
+  unless they solve a current, concrete requirement.
+- During design review, remove indirection that makes the execution flow harder
+  to follow without providing a clear benefit.

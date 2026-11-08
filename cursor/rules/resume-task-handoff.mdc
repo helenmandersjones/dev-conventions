@@ -8,7 +8,7 @@ alwaysApply: false
 
 # Resume task handoff (opt-in)
 
-When the user invokes this rule (or uses the **`resume-task-handoff`** skill / phrase in **`docs/tasks/README.md`**):
+When the user invokes this rule (or uses the **`nbn-resume-task-handoff`** skill / phrase in **`docs/tasks/README.md`**):
 
 1. Read **`docs/tasks/CURRENT_HANDOFF.md`**.
 2. Follow links to **`docs/tasks/open/<slug>-handoff.md`** and the task **`docs/tasks/open/<slug>.md`**.

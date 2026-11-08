@@ -1,0 +1,28 @@
+---
+description: Use meaningful method names that express domain intent and scope
+alwaysApply: true
+---
+
+# Meaningful method names
+
+Name methods so a caller can understand the result or effect without reading the implementation.
+
+1. Include the operation, domain object, and meaningful scope when each clarifies the contract.
+2. Prefer domain language over compressed implementation shorthand.
+3. Use verbs that match behaviour: `get` for one identified result, `find` for an optional result, `list` for a collection, and `count` for a number.
+4. Keep paired methods symmetrical, such as `listRecordsAtMapLocation` and `countRecordsAtMapLocation`.
+5. Omit words already made unambiguous by the owning type or parameters; meaningful does not mean maximally long.
+
+Prefer:
+
+```groovy
+countRecordsInViewport(query, bounds)
+listRecordsAtMapLocation(query, longitude, latitude)
+```
+
+Avoid names that leave the returned domain object unclear:
+
+```groovy
+countMapLocation(query, longitude, latitude)
+listMappable(query, bounds)
+```

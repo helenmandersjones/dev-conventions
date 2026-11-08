@@ -1,0 +1,25 @@
+---
+description: Pragmatic application deployment automation using versioned scripts and thin job-runner wrappers
+globs: Dockerfile,**/Dockerfile,**/docker-compose*.yml,**/docker-compose*.yaml,**/compose*.yml,**/compose*.yaml,**/deployment/**,**/rundeck/**,**/scripts/*.sh,**/ansible/**
+alwaysApply: false
+---
+
+# Application deployment automation
+
+When changing application deployment or operational automation, read
+`docs/conventions/application-deployment-automation.md`.
+
+Keep automation proportional to the application and its operator. Put behavior
+in version-controlled scripts that can be run directly; keep Rundeck or another
+job runner as a thin parameter, permission, and logging layer. Prefer existing
+team tools and conventions over introducing a platform stack merely because it
+would suit a larger system.
+
+For mutable actions, support a useful dry-run where practical and deliberate
+non-secret debug logging. Do not use global shell tracing in scripts that can
+access credentials. Test cheap behavior locally, then use the real QA
+environment for integration rather than building cloud mocks by default.
+
+Where a project already uses Ansible, run `ansible-lint` and
+`ansible-playbook --syntax-check` on changed playbooks and roles as part of
+that local verification.

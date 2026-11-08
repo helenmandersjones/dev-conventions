@@ -1,0 +1,24 @@
+---
+description: Bind variable-length SQL parameter lists as an array, not a dynamically-sized IN (?,?,...)
+alwaysApply: true
+---
+
+# Variable-length SQL parameter lists
+
+When a query needs to filter by a set of values whose size varies per call
+(e.g. `WHERE col IN (...)` over a batch of names/ids), do not build the
+placeholder list by joining one `?` per value. The resulting SQL text is a
+different literal string every time the size changes, which defeats
+prepared-statement plan caching (the database re-parses and re-plans a new
+query shape on every call) and can approach parameter-count limits at scale.
+
+Prefer a single array bind instead:
+
+- **PostgreSQL/JDBC**: `WHERE col = ANY(?)`, binding one `java.sql.Array`
+  (`connection.createArrayOf(...)`) for the whole collection — one stable,
+  cacheable query text regardless of how many values are in the collection.
+
+Only fall back to a dynamically-sized `IN (?,?,...)` list when the target
+database genuinely cannot bind an array for the driver in use (for example, a
+test double or a database without array support) — and note that constraint
+at the call site when you do.

@@ -1,5 +1,5 @@
 ---
-name: resume-task-handoff
+name: nbn-resume-task-handoff
 description: >-
   Resume multi-slice TDD task work. Read docs/tasks/CURRENT_HANDOFF.md, then the
   linked *-handoff.md and task file. Use when the user says "resume task handoff",

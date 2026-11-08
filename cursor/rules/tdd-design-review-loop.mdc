@@ -15,10 +15,11 @@ For every task or slice:
    - deviations from established style/patterns
    - overly defensive code (for example excessive try/catch)
 4. **REFACTOR**: improve structure without behaviour changes.
-5. **VERIFY**: rerun tests.
+5. **VERIFY**: rerun tests and lint (`./gradlew check`; see `lint-verification`).
 
 Do not mark work complete at GREEN. Completion requires:
 - tests pass
+- lint passes
 - design is simple
 - implementation matches existing patterns
 - unnecessary abstractions are removed

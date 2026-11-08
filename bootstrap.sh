@@ -26,6 +26,7 @@ fi
 # Skills live once under skills/; Cursor and Codex each get a discovery symlink.
 links=(
   "AGENTS.md:AGENTS.md"
+  "CLAUDE.md:AGENTS.md"
   ".cursor/rules:cursor/rules"
   ".cursor/skills:skills"
   ".agents/skills:skills"
@@ -92,6 +93,7 @@ fi
 echo
 echo "Done. Add these to $project_dir/.gitignore if not already present:"
 echo "  /AGENTS.md"
+echo "  /CLAUDE.md"
 echo "  /.cursor/rules"
 echo "  /.cursor/skills"
 echo "  /.agents/skills"

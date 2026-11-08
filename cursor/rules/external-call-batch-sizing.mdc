@@ -1,0 +1,30 @@
+---
+description: Size and time out external-service batch calls independently from internal batch sizes
+alwaysApply: true
+---
+
+# External-service call sizing and timeouts
+
+When a pipeline that already batches for internal reasons (DB writes, file
+I/O) also calls out to an external service (HTTP, RPC, etc.) once per batch,
+do not silently reuse the internal batch-size constant as the payload size
+for that external call. They are unrelated concerns sized for different
+things — one for local write efficiency, one for what a remote service can
+process inside its response-time budget — and coupling them means a later
+change to the internal batch size (tuned for the DB) silently changes the
+external call's payload size and failure risk too.
+
+1. **Size the external call for the external service**, not for whatever
+   internal batch size happens to be in scope. If the service's realistic
+   processing time for the largest payload you intend to send is not known,
+   chunk the call (send it in bounded sub-batches) rather than sending the
+   full internal batch in one request.
+2. **Set the timeout to fit the payload size you actually send**, and treat
+   the two as one tunable pair, not independent defaults. A fixed timeout
+   sized for a small/typical payload will misclassify a *slow-but-alive*
+   service (busy processing a large, legitimate request) as an outage.
+3. **Scope the failure to the call, not the whole job**, where practical. A
+   single oversized external call timing out should not be indistinguishable
+   from a genuine service outage if a smaller call would have succeeded —
+   prefer retry/chunk-and-retry for a timeout over failing an entire
+   multi-batch job on the first slow response.

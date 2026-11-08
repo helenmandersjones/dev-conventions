@@ -1,0 +1,28 @@
+---
+description: Use a real JSON library, not hand-rolled string concatenation
+alwaysApply: true
+---
+
+# JSON serialization
+
+Do not build JSON by string concatenation or `StringBuilder` (e.g. manually
+wrapping values in quotes and joining with commas). Hand-rolled string
+escaping is easy to get subtly wrong — it is common to escape `"` but miss
+`\`, control characters, or newlines — and the risk is highest for values
+that did not originate from this application (an external service response,
+user-supplied text), which is exactly the case most likely to contain a
+character your escaping forgot.
+
+Use the platform's JSON library instead:
+
+- **Java**: `com.fasterxml.jackson.databind.ObjectMapper` —
+  `objectMapper.writeValueAsString(value)`. Inject/reuse one `ObjectMapper`
+  rather than constructing one per call.
+- **Groovy**: `groovy.json.JsonOutput.toJson(value)` or `new JsonBuilder(value)`
+  for ad hoc serialization; `grails.converters.JSON` (`value as JSON`) where
+  the codebase already renders through Grails' JSON converter.
+
+This applies equally to a single scalar/array (e.g. a list of string codes
+written into a JSON column) and to full request/response bodies — there is
+no "too small to bother" case where hand-rolled string building is safer or
+simpler than the library call.

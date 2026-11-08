@@ -1,5 +1,5 @@
 ---
-name: black-box-tests-from-public-api
+name: nbn-black-box-tests-from-public-api
 description: >-
   Write black-box tests from a type's public API only (signatures, public
   constants, declared exceptions, brief Javadoc). Use when the user asks for

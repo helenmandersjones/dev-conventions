@@ -1,0 +1,13 @@
+# Readable formatting
+
+Keep code easy to scan:
+
+- Use whitespace to separate logical steps within a method.
+- Put one statement on each line.
+- Do not compress fields, assignments, control flow, or resource handling onto the same line.
+- Expand `if`, `for`, `while`, `try`, and `catch` blocks onto multiple lines.
+- Wrap long method declarations, method calls, and argument lists consistently with the surrounding code.
+- Use specific, meaningful type and variable names; avoid vague names and loosely typed maps where a small typed class or record is clearer.
+
+Spotless applies the layout, and CodeNarc and PMD enforce braces on control
+statements (see `docs/conventions/linting.md`). The rest of this rule is judgement.
